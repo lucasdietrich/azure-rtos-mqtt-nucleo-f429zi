@@ -43,7 +43,7 @@ Core/Src/stm32f4xx_hal_msp.c \
 Core/Src/stm32f4xx_hal_timebase_tim.c \
 AZURE_RTOS/App/app_azure_rtos.c \
 NetXDuo/App/app_netxduo.c \
-../Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.c \
+Drivers/BSP/STM32F4xx_Nucleo_144/stm32f4xx_nucleo_144.c \
 Drivers/BSP/Components/lan8742/lan8742.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c \
 Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c \
@@ -1051,13 +1051,22 @@ Middlewares/ST/threadx/common/src/tx_queue_performance_system_info_get.c \
 Middlewares/ST/threadx/common/src/tx_semaphore_performance_info_get.c \
 Middlewares/ST/threadx/common/src/tx_semaphore_performance_system_info_get.c \
 Middlewares/ST/threadx/common/src/tx_timer_performance_info_get.c \
-Middlewares/ST/threadx/common/src/tx_timer_performance_system_info_get.c  
+Middlewares/ST/threadx/common/src/tx_timer_performance_system_info_get.c \
+STM32CubeIDE/Application/User/Core/syscalls.c
 
 # ASM sources
 ASM_SOURCES =  \
 startup_stm32f429xx.s \
-Core/Src/tx_initialize_low_level.s
-
+Core/Src/tx_initialize_low_level.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_context_save.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_context_restore.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_interrupt_control.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_interrupt_disable.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_interrupt_restore.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_schedule.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_stack_build.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_thread_system_return.s \
+Middlewares/ST/threadx/ports/cortex_m4/gnu/src/tx_timer_interrupt.s
 
 #######################################
 # binaries
@@ -1133,7 +1142,7 @@ C_INCLUDES =  \
 -IMiddlewares/ST/netxduo/crypto_libraries/ports/cortex_m4/ac6/inc/ \
 -IMiddlewares/ST/threadx/common/inc/ \
 -IMiddlewares/ST/threadx/ports/cortex_m4/gnu/inc/ \
--I../Drivers/BSP/STM32F4xx_Nucleo_144
+-IDrivers/BSP/STM32F4xx_Nucleo_144
 
 
 # compile gcc flags
@@ -1171,7 +1180,7 @@ all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET
 # list of objects
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
 vpath %.c $(sort $(dir $(C_SOURCES)))
-# list of ASM program objects
+# list of ASM .s program objects
 OBJECTS += $(addprefix $(BUILD_DIR)/,$(notdir $(ASM_SOURCES:.s=.o)))
 vpath %.s $(sort $(dir $(ASM_SOURCES)))
 

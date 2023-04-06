@@ -1,0 +1,20 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch cortex-debug nucleo_429zi",
+			"cwd": "${workspaceRoot}",
+			"executable": "build/Nx_MQTT_Client.elf",
+			"request": "launch",
+			"type": "cortex-debug",
+			"servertype": "openocd",
+			"device": "stm32f429zi",
+			"runToEntryPoint": "main",
+			"configFiles": [
+				"interface/stlink.cfg",
+				"target/stm32f4x.cfg"
+			],
+			"svdFile": ".vscode/STM32F429.svd"
+		}
+	]
+}

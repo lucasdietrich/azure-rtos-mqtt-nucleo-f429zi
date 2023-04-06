@@ -1,0 +1,8 @@
+flash:
+    openocd -f interface/stlink.cfg -f target/stm32f4x.cfg -c "program build/Nx_MQTT_Client.elf verify reset exit"
+
+monitor:
+    python3 -m serial.tools.miniterm --filter=direct /dev/ttyACM0 115200
+
+dis:
+    arm-none-eabi-objdump -S build/Nx_MQTT_Client.elf > dis.s
